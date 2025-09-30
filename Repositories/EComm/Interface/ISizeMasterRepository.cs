@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.EComm.Interface
+namespace Repositories.UserManagement.Interface
 {
-	internal interface ISizeMaster
+	public interface ISizeMasterRepository
 	{
 	}
 }

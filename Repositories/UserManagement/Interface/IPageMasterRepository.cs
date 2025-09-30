@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.UserManagement.Interface
 {
-	internal interface IPageMaster
+	internal interface IPageMasterRepository
 	{
 	}
 }
