@@ -50,15 +50,17 @@ builder.Services.AddCors(Options =>
 });
 var app = builder.Build();
 
+ServicesConfig.AddConfigure(app, app.Environment);
+
 //app.MapGet("/", () => "Hello World!");
-app.UseCors("CorsPolicy");
-app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sahosoft Mall API v1");
-	c.RoutePrefix = string.Empty;
-});
-app.UseStaticFiles();
+//app.UseCors("CorsPolicy");
+//app.UseSwagger();
+//app.UseSwaggerUI(c =>
+//{
+//	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sahosoft Mall API v1");
+//	c.RoutePrefix = string.Empty;
+//});
+//app.UseStaticFiles();
 app.MapControllers();
 
 app.Run();

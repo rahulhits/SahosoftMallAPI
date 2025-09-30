@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="EComm\RequestDTO\" />
-    <Folder Include="EComm\ResponseDTO\" />
     <Folder Include="UserManagement\RequestDTO\" />
     <Folder Include="UserManagement\ResponseDTO\" />
   </ItemGroup>
