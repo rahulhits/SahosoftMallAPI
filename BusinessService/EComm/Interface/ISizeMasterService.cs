@@ -11,10 +11,10 @@ namespace BusinessService.EComm.Interface
 {
 	public interface ISizeMasterService
 	{
-		ResultDto<long> Add(SizeMasterRequest viewModel);
-		ResultDto<long> Update(SizeMasterRequest viewModel);
-		ResultDto<long> Delete(long id);
-		ResultDto<IEnumerable<SizeMasterResponse>> GetAll();
-		ResultDto<SizeMasterResponse> GetById(long id);
+		ApiResponse<long> Add(SizeMasterRequest viewModel);
+		ApiResponse<long> Update(SizeMasterRequest viewModel);
+		ApiResponse<long> Delete(long id);
+		ApiResponse<IEnumerable<SizeMasterResponse>> GetAll();
+		ApiResponse<SizeMasterResponse> GetById(long id);
 	}
 }

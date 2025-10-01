@@ -9,18 +9,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-	c.SwaggerDoc("v1", new() { 
-		Title = "Sahosoft  Mall  API", Version = "v1" ,Description="API Sahosoft Mall Application",
-			TermsOfService=new Uri("Sahosoft.com/Terms"), 
-		Contact=new()
+	c.SwaggerDoc("v1", new()
+	{
+		Title = "Sahosoft Mall API",
+		Version = "v1",
+		Description = "API for Sahosoft Mall Application",
+		TermsOfService = new Uri("https://sahosofttech.com/terms"),
+		Contact = new()
 		{
-			Name="Sahosoft Support",
-			Email="support@sahosoft.com",
-			Url=new Uri("https://sahosoft.com/support")
+			Name = "Sahosoft Tech Support",
+			Email = "support@sahosoft.com",
+			Url = new Uri("https://sahosofttech.com/contact")
 		},
-		License=new()
+		License = new()
 		{
-			Name="Sahosoft License",Url=new Uri("https://sahosoft.com/license")
+			Name = "Use under LICX",
+			Url = new Uri("https://sahosofttech.com/license")
 		}
 	});
 });

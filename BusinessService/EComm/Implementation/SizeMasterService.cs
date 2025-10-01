@@ -3,7 +3,6 @@ using BusinessEntities.Common;
 using BusinessEntities.EComm.RequestDTO;
 using BusinessEntities.EComm.ResponseDTO;
 using BusinessService.EComm.Interface;
-using Repositories.EComm.Implementation;
 using Repositories.EComm.Interface;
 
 namespace BusinessService.EComm.Implementation
@@ -12,125 +11,70 @@ namespace BusinessService.EComm.Implementation
 	{
 		private readonly ISizeMasterRepository _sizeMasterRepository;
 		private IMapper _mapper;
-		public SizeMasterService(SizeMasterRepository sizeMasterRepository, IMapper mapper)
+		public SizeMasterService(ISizeMasterRepository sizeMasterRepository, IMapper mapper)
 		{
 			_sizeMasterRepository = sizeMasterRepository;
 			_mapper = mapper;
 		}
-
-		public SizeMasterService(ISizeMasterRepository sizeMasterRepository)
+		public ApiResponse<long> Add(SizeMasterRequest viewModel)
 		{
-			_sizeMasterRepository = sizeMasterRepository;
-		}
-
-		public ResultDto<long> Add(SizeMasterRequest viewModel)
-		{
-			var res = new ResultDto<long>()
-			{
-				IsSuccess = false,
-				Data = 0,
-				Errors = new List<string>()
-			};
 			var response = _sizeMasterRepository.Add(viewModel);
-			if (response== -1)
-			{
-				res.Errors.Add("Size Master with the same name already exists.");
-			}
-			else if(response == -2)
-			{
-				res.Errors.Add("Failed to add size master due to database error."); 
-			}
-			else if (response > 0)
-			{
-				res.IsSuccess = true;
-				res.Data = response;
-			}
-			
-
-				return res;
-
-
-		}
-
-		public ResultDto<long> Delete(long Id)
-		{
-			var res = new ResultDto<long>()
-			{
-				IsSuccess = false,
-				Data = 0,
-				Errors = new List<string>()
-			};
-			var response = _sizeMasterRepository.Delete(Id);
 			if (response == -1)
 			{
-				res.Errors.Add("Size Master is in use and cannot be deleted.");
+				return ApiResponse<long>.Failure("Size Master with the same name already exists.");
 			}
 			else if (response == -2)
 			{
-				res.Errors.Add("Failed to delete size master due to database error.");
+				return ApiResponse<long>.Failure("Failed to add Size Master due to a database error.");
 			}
-			else if (response > 0)
-			{
-				res.IsSuccess = true;
-				res.Data = response;
-			}
-			return res;
+			return ApiResponse<long>.Success(response);
 		}
 
-		public ResultDto<IEnumerable<SizeMasterResponse>> GetAll()
+		public ApiResponse<long> Delete(long id)
 		{
-			var res= new ResultDto<IEnumerable<SizeMasterResponse>>()
+			var response = _sizeMasterRepository.Delete(id);
+			if (response == -1)
 			{
-				IsSuccess = false,
-				Data = Enumerable.Empty<SizeMasterResponse>(),
-				Errors = new List<string>()
-			};
+				return ApiResponse<long>.Failure("Data Not Found.");
+			}
+			else if (response == -2)
+			{
+				return ApiResponse<long>.Failure("Failed to delete Size Master due to a database error.");
+			}
+			return ApiResponse<long>.Success(response);
+		}
+		public ApiResponse<IEnumerable<SizeMasterResponse>> GetAll()
+		{
 			var response = _sizeMasterRepository.GetAll();
-			if (response ==null)
-			{
-				res.Errors.Add("Data not Found");
-			}
-			else
-			{
-				res.IsSuccess = true;
-				res.Data = _mapper.Map<IEnumerable<SizeMasterResponse>>(response);
-			}
-			return res;
-		}
-
-		public ResultDto<SizeMasterResponse> GetById(long Id)
-		{
-			var res = new ResultDto<SizeMasterResponse>()
-			{
-				IsSuccess = false,
-				Data = null,
-				Errors = new List<string>()
-			};
-			var response = _sizeMasterRepository.GetById(Id);
 			if (response == null)
 			{
-				res.Errors.Add("Data not Found");
+				return ApiResponse<IEnumerable<SizeMasterResponse>>.Failure("Data Not Found !!");
 			}
-			else
-			{
-				res.IsSuccess = true;
-				res.Data = _mapper.Map<SizeMasterResponse>(response);
-			}
-			return res;
+			return ApiResponse<IEnumerable<SizeMasterResponse>>.Success(_mapper.Map<IEnumerable<SizeMasterResponse>>(response));
 		}
 
-		public ResultDto<long> Update(SizeMasterRequest Viewmodel)
+		public ApiResponse<SizeMasterResponse> GetById(long id)
 		{
-
-			var res = new ResultDto<long>()
+			var response = _sizeMasterRepository.GetById(id);
+			if (response == null || response.Id == 0)
 			{
-				IsSuccess = false,
-				Data = 0,
-				Errors = new List<string>()
-			};
+				return ApiResponse<SizeMasterResponse>.Failure("Data Not Found !!");
+			}
+			return ApiResponse<SizeMasterResponse>.Success(_mapper.Map<SizeMasterResponse>(response));
+		}
 
-			return res;
-
+		public ApiResponse<long> Update(SizeMasterRequest viewModel)
+		{
+			var response = _sizeMasterRepository.Update(viewModel);
+			if (response == -1)
+			{
+				return ApiResponse<long>.Failure("Size Master with the same name already exists.");
+			}
+			else if (response == -2)
+			{
+				return ApiResponse<long>.Failure("Failed to update Size Master due to a database error.");
+			}
+			return ApiResponse<long>.Success(response);
 		}
 	}
 }
