@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Repositories.EComm.DbEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace Repositories
 		public ECommDBContext(DbContextOptions<ECommDBContext> options) : base(options)
 		{
 		}
+		public DbSet<DBSizeMaster> SizeMasters { get; set; }
 	}
 }

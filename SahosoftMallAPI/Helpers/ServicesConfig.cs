@@ -1,4 +1,8 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using BusinessService.EComm.Implementation;
+using BusinessService.EComm.Interface;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Repositories.EComm.Implementation;
+using Repositories.EComm.Interface;
 using Repositories.UserManagement.Implementation;
 using Repositories.UserManagement.Interface;
 

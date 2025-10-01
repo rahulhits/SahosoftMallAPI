@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessEntities.EComm.ResponseDTO
 {
-	public class SizeMasterResponsecs:BaseResponse
+	public class SizeMasterResponse:BaseResponse
 	{
 		public int Id { get; set; }
 		public string? Name { get; set; }

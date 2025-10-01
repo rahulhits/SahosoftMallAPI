@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace BusinessEntities.EComm.RequestDTO
 {
-	internal class SizeMasterRequest
+	public class SizeMasterRequest
 	{
 		public int Id { get; set; }
 		public string? Name { get; set; }
+		public string? CreatedBy { get; set; }
 
-		
+
 
 	}
 }
