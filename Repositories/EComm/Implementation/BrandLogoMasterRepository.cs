@@ -8,17 +8,18 @@ using Repositories.EComm.Interface;
 
 namespace Repositories.EComm.Implementation
 {
-	public class SizeMasterRepository : ISizeMasterRepository
+	public class BrandLogoMasterRepository : IBrandLogoMasterRepository
 	{
 		private ECommDBContext _context;
-		public SizeMasterRepository(ECommDBContext context)
+		public BrandLogoMasterRepository(ECommDBContext context)
 		{
 			_context = context;
 		}
-		public DBResponseInt Add(SizeMasterRequest viewModel)
+		public DBResponseInt Add(BrandLogoMasterRequest viewModel)
 		{
-			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute InsertSizeMaster @Name,@CreatedBy",
+			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute InsertBrandLogo @Name,@ImagePath,@CreatedBy",
 				new SqlParameter("@Name", viewModel.Name),
+				new SqlParameter("@ImagePath", viewModel.ImagePath),
 				new SqlParameter("@CreatedBy", viewModel.CreatedBy)
 				).AsEnumerable().FirstOrDefault() ?? new DBResponseInt();
 			return response;
@@ -26,32 +27,33 @@ namespace Repositories.EComm.Implementation
 
 		public DBResponseInt Delete(long id)
 		{
-			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute DeleteSizeMaster @Id",
+			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute DeleteBrandLogo @Id",
 					 new SqlParameter("@Id", id)
 					 ).AsEnumerable().FirstOrDefault() ?? new DBResponseInt();
 			return response;
 		}
 
-		public IEnumerable<DBSizeMaster> GetAll(GetAllByUserId model)
+		public IEnumerable<DBBrandLogoMaster> GetAll(GetAllByUserId model)
 		{
-			IEnumerable<DBSizeMaster> response = _context.SizeMasters.FromSqlRaw("execute Proc_GetAll_SizeMaster @UserId",
+			IEnumerable<DBBrandLogoMaster> response = _context.BrandLogoMasters.FromSqlRaw("execute Proc_GetAll_BrandLogo @UserId",
 				  new SqlParameter("@UserId", model.UserId));
 			return response;
 		}
 
-		public DBSizeMaster GetById(long id)
+		public DBBrandLogoMaster GetById(long id)
 		{
-			DBSizeMaster response = _context.SizeMasters.FromSqlRaw("execute GetSizeMasterById @Id",
+			DBBrandLogoMaster response = _context.BrandLogoMasters.FromSqlRaw("execute GetBrandLogoById @Id",
 					new SqlParameter("@Id", id)
-					).AsEnumerable().FirstOrDefault() ?? new DBSizeMaster();
+					).AsEnumerable().FirstOrDefault() ?? new DBBrandLogoMaster();
 			return response;
 		}
 
-		public DBResponseInt Update(SizeMasterRequest viewModel)
+		public DBResponseInt Update(BrandLogoMasterRequest viewModel)
 		{
-			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute UpdateSizeMaster @Id,@Name,@ModifiedBy,@ModifiedOn",
+			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute UpdateBrandLogo @Id,@Name,@ImagePath,@ModifiedBy,@ModifiedOn",
 					new SqlParameter("@Id", viewModel.Id),
 					new SqlParameter("@Name", viewModel.Name),
+					new SqlParameter("@ImagePath", viewModel.ImagePath),
 					new SqlParameter("@ModifiedBy", viewModel.ModifiedBy),
 					new SqlParameter("@ModifiedOn", viewModel.ModifiedOn)
 					).AsEnumerable().FirstOrDefault() ?? new DBResponseInt();

@@ -1,11 +1,12 @@
-﻿using Repositories.EComm.Common;
+﻿using BusinessEntities.Common;
 
-namespace Repositories.EComm.DbEntity
+namespace BusinessEntities.EComm.ResponseDTO
 {
-	public class DBSizeMaster : BaseEntity
+	public class ColorMasterResponse : BaseResponse
 	{
 		public int Id { get; set; }
 		public string? Name { get; set; }
+		public string? Code { get; set; }
 		public string? CreatedByName { get; set; }
 		public string? CreatedByUserType { get; set; }
 	}

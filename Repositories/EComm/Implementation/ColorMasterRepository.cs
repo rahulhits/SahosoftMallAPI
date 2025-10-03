@@ -8,17 +8,19 @@ using Repositories.EComm.Interface;
 
 namespace Repositories.EComm.Implementation
 {
-	public class SizeMasterRepository : ISizeMasterRepository
+	public class ColorMasterRepository : IColorMasterRepository
 	{
 		private ECommDBContext _context;
-		public SizeMasterRepository(ECommDBContext context)
+		public ColorMasterRepository(ECommDBContext context)
 		{
 			_context = context;
 		}
-		public DBResponseInt Add(SizeMasterRequest viewModel)
+
+		public DBResponseInt Add(ColorMasterRequest viewModel)
 		{
-			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute InsertSizeMaster @Name,@CreatedBy",
+			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute InsertColorMaster @Name,@Code,@CreatedBy",
 				new SqlParameter("@Name", viewModel.Name),
+				new SqlParameter("@Code", viewModel.Code),
 				new SqlParameter("@CreatedBy", viewModel.CreatedBy)
 				).AsEnumerable().FirstOrDefault() ?? new DBResponseInt();
 			return response;
@@ -26,32 +28,33 @@ namespace Repositories.EComm.Implementation
 
 		public DBResponseInt Delete(long id)
 		{
-			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute DeleteSizeMaster @Id",
+			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute DeleteColorMaster @Id",
 					 new SqlParameter("@Id", id)
 					 ).AsEnumerable().FirstOrDefault() ?? new DBResponseInt();
 			return response;
 		}
 
-		public IEnumerable<DBSizeMaster> GetAll(GetAllByUserId model)
+		public IEnumerable<DBColorMaster> GetAll(GetAllByUserId model)
 		{
-			IEnumerable<DBSizeMaster> response = _context.SizeMasters.FromSqlRaw("execute Proc_GetAll_SizeMaster @UserId",
+			IEnumerable<DBColorMaster> response = _context.ColorMasters.FromSqlRaw("execute Proc_GetAll_ColorMaster @UserId",
 				  new SqlParameter("@UserId", model.UserId));
 			return response;
 		}
 
-		public DBSizeMaster GetById(long id)
+		public DBColorMaster GetById(long id)
 		{
-			DBSizeMaster response = _context.SizeMasters.FromSqlRaw("execute GetSizeMasterById @Id",
+			DBColorMaster response = _context.ColorMasters.FromSqlRaw("execute GetColorMasterById @Id",
 					new SqlParameter("@Id", id)
-					).AsEnumerable().FirstOrDefault() ?? new DBSizeMaster();
+					).AsEnumerable().FirstOrDefault() ?? new DBColorMaster();
 			return response;
 		}
 
-		public DBResponseInt Update(SizeMasterRequest viewModel)
+		public DBResponseInt Update(ColorMasterRequest viewModel)
 		{
-			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute UpdateSizeMaster @Id,@Name,@ModifiedBy,@ModifiedOn",
+			DBResponseInt response = _context.ResponseInts.FromSqlRaw(" execute UpdateColorMaster @Id,@Name,@Code,@ModifiedBy,@ModifiedOn",
 					new SqlParameter("@Id", viewModel.Id),
 					new SqlParameter("@Name", viewModel.Name),
+					new SqlParameter("@Code", viewModel.Code),
 					new SqlParameter("@ModifiedBy", viewModel.ModifiedBy),
 					new SqlParameter("@ModifiedOn", viewModel.ModifiedOn)
 					).AsEnumerable().FirstOrDefault() ?? new DBResponseInt();
@@ -59,3 +62,4 @@ namespace Repositories.EComm.Implementation
 		}
 	}
 }
+

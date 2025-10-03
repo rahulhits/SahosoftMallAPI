@@ -19,33 +19,25 @@ namespace BusinessService.EComm.Implementation
 		public ApiResponse<long> Add(SizeMasterRequest viewModel)
 		{
 			var response = _sizeMasterRepository.Add(viewModel);
-			if (response == -1)
+			if (response.Value == -1)
 			{
 				return ApiResponse<long>.Failure("Size Master with the same name already exists.");
 			}
-			else if (response == -2)
-			{
-				return ApiResponse<long>.Failure("Failed to add Size Master due to a database error.");
-			}
-			return ApiResponse<long>.Success(response);
+			return ApiResponse<long>.Success(response.Value);
 		}
 
 		public ApiResponse<long> Delete(long id)
 		{
 			var response = _sizeMasterRepository.Delete(id);
-			if (response == -1)
+			if (response.Value == -1)
 			{
 				return ApiResponse<long>.Failure("Data Not Found.");
 			}
-			else if (response == -2)
-			{
-				return ApiResponse<long>.Failure("Failed to delete Size Master due to a database error.");
-			}
-			return ApiResponse<long>.Success(response);
+			return ApiResponse<long>.Success(response.Value);
 		}
-		public ApiResponse<IEnumerable<SizeMasterResponse>> GetAll()
+		public ApiResponse<IEnumerable<SizeMasterResponse>> GetAll(GetAllByUserId model)
 		{
-			var response = _sizeMasterRepository.GetAll();
+			var response = _sizeMasterRepository.GetAll(model);
 			if (response == null)
 			{
 				return ApiResponse<IEnumerable<SizeMasterResponse>>.Failure("Data Not Found !!");
@@ -66,15 +58,11 @@ namespace BusinessService.EComm.Implementation
 		public ApiResponse<long> Update(SizeMasterRequest viewModel)
 		{
 			var response = _sizeMasterRepository.Update(viewModel);
-			if (response == -1)
+			if (response.Value == -1)
 			{
 				return ApiResponse<long>.Failure("Size Master with the same name already exists.");
 			}
-			else if (response == -2)
-			{
-				return ApiResponse<long>.Failure("Failed to update Size Master due to a database error.");
-			}
-			return ApiResponse<long>.Success(response);
+			return ApiResponse<long>.Success(response.Value);
 		}
 	}
 }
