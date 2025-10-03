@@ -22,7 +22,7 @@
     <Folder Include="Areas\UserManagement\Models\" />
     <Folder Include="Areas\UserManagement\Views\" />
     <Folder Include="Loggers\" />
-    <Folder Include="wwwroot\Images\" />
+    <Folder Include="wwwroot\Images\EComm\" />
   </ItemGroup>
 
   <ItemGroup>
