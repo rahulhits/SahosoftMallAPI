@@ -15,6 +15,10 @@ namespace BusinessService.EComm.MapperRules
 			CreateMap<DBCategoryMaster, CategoryMasterResponse>();
 			CreateMap<DBBrandLogoMaster, BrandLogoMasterResponse>();
 
+			CreateMap<DBUserMaster, UserMasterResponse>();
+			CreateMap<DBUserMasterLogin, UserMasterLoginResponse>();
+			CreateMap<DBUserMaster_GetUserByUserType, UserMaster_GetUserByUserTypeResponse>();
+
 		}
 	}
 }

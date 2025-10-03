@@ -16,5 +16,10 @@ namespace Repositories
 		public DbSet<DBUserTypeMaster> UserTypeMasters { get; set; }
 		public DbSet<DBCategoryMaster> CategoryMasters { get; set; }
 		public DbSet<DBBrandLogoMaster> BrandLogoMasters { get; set; }
+
+		public DbSet<DBUserMaster> UserMasters { get; set; }
+		public DbSet<DBUserMaster_GetUserByUserType> UserMaster_GetUserByUserTypes { get; set; }
+		public DbSet<DBUserMasterLogin> UserMasterLogins { get; set; }
+
 	}
 }
