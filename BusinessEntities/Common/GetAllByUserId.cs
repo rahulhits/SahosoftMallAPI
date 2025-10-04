@@ -1,7 +1,7 @@
 ﻿namespace BusinessEntities.Common
 {
-	public  class GetAllByUserId
+	public class GetAllByUserId
 	{
-		public long  UserId { get; set; }
+		public long UserId { get; set; }
 	}
 }
